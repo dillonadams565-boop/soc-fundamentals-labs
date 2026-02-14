@@ -14,9 +14,15 @@ Capture and analyse normal network traffic to understand standard request/respon
 - Observed DNS resolution, TCP handshakes, and HTTPS traffic
 
 ## Key Observations
-- DNS queries preceded website access
-- TCP three-way handshakes were observed before data transfer
-- HTTPS traffic appeared encrypted, with no readable payload data
+- A DNS query for www.wikipedia.org was observed with a unique Transaction ID, identifying the request.
+- The corresponding DNS response was matched using the same Transaction ID, confirming successful domain resolution.
+- DNS resolution occurred prior to TCP connection establishment, which is expected behaviour for normal web traffic.
+
+## Evidence
+
+![DNS Query](screenshots/dns-query.png)
+![DNS Response](screenshots/dns-response.png)
+
 
 ## Outcome
 This lab establishes a baseline understanding of what normal network traffic looks like before analysing suspicious or malicious behaviour.
