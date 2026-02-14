@@ -35,9 +35,10 @@ dns
 A burst of NXDOMAIN DNS activity like this could indicate automated or scripted behaviour, misconfigured applications, or potential malware beaconing patterns depending on context. In an enterprise environment, this activity would warrant further investigation.
 
 ### Evidence
-- screenshots/dns_nxdomain_burst.png
-- screenshots/dns_nxdomain_response.png
-- pcap/dns_nxdomain_nonbaseline.pcapng
+- [DNS NXDOMAIN burst](screenshots/dns_nxdomain_burst.png)
+- [DNS NXDOMAIN response](screenshots/dns_nxdomain_response.png)
+- [DNS NXDOMAIN PCAP](pcap/dns_nxdomain_nonbaseline.pcapng)
+
 
 ## Next Steps
 Additional non-baseline analysis will be performed for TCP connection behaviour and TLS session characteristics.
