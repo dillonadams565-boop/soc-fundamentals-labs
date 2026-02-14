@@ -1,38 +1,56 @@
 # Lab 1 – Baseline Network Traffic Analysis
 
 ## Objective
-Capture and analyse normal network traffic to build an understanding of standard request and response behaviour during everyday web browsing.
+Capture and analyse normal network traffic to understand how everyday web browsing works at the network level.
 
 ## Environment
-- Host OS: Windows
-- Tool: Wireshark
-- Network: Home network
+- Host OS: Windows  
+- Tool: Wireshark  
+- Network: Home network  
 
 ## Activity Performed
-- Captured live network traffic using Wireshark
-- Visited example.com and wikipedia.org during the capture
-- Observed DNS resolution, TCP connection setup, and HTTPS traffic
+- Captured live network traffic using Wireshark  
+- Visited example.com and wikipedia.org during the capture  
+- Observed DNS resolution, TCP connection setup, and HTTPS (TLS) traffic  
 
 ## Key Observations
-- A DNS query for www.wikipedia.org was observed with a unique Transaction ID, which identifies the request.
-- The matching DNS response was correlated using the same Transaction ID, confirming successful domain resolution.
-- DNS resolution occurred before any TCP connection was established, which aligns with normal web traffic behaviour.
 
-- A TCP three-way handshake was observed prior to HTTPS communication.
-- The handshake consisted of a SYN packet from the client, a SYN/ACK response from the server, and a final ACK from the client.
-- Successful completion of the handshake confirmed that a reliable TCP connection was established before encrypted data transfer began.
+### DNS Behaviour
+- A DNS query for www.wikipedia.org was observed.
+- The DNS response matched the query using the same Transaction ID.
+- This confirmed that the domain name was successfully resolved.
+- DNS resolution occurred before any TCP connection was established, which is expected behaviour.
+
+### TCP Behaviour
+- A TCP three-way handshake was observed before HTTPS communication.
+- The handshake followed the standard sequence:
+  - SYN from the client
+  - SYN/ACK from the server
+  - ACK from the client
+- Completion of this handshake confirmed that a TCP connection was successfully established.
+
+### TLS Behaviour
+- After the TCP connection was established, a TLS handshake was observed.
+- A TLS Client Hello was sent by the client, including the Server Name Indication (SNI) for wikipedia.org.
+- The server responded with a TLS Server Hello, confirming the encrypted session setup.
+- Following the handshake, encrypted TLS application data was observed.
+- The contents of the HTTPS traffic were not readable, which confirms encryption was in use.
 
 ## Evidence
-The screenshots below show the DNS query and response, followed by the TCP three-way handshake observed during the same browsing session.
 
 ### DNS Resolution
-![DNS Query](screenshots/dns-query.png)
+![DNS Query](screenshots/dns-query.png)  
 ![DNS Response](screenshots/dns-response.png)
 
 ### TCP Three-Way Handshake
-![TCP SYN](screenshots/tcp-syn.png)
-![TCP SYN-ACK](screenshots/tcp-synack.png)
+![TCP SYN](screenshots/tcp-syn.png)  
+![TCP SYN-ACK](screenshots/tcp-synack.png)  
 ![TCP ACK](screenshots/tcp-ack.png)
 
+### TLS Handshake and Encrypted Traffic
+![TLS Client Hello](screenshots/tls-client-hello-sni-wikipedia.png)  
+![TLS Server Hello](screenshots/tls-server-hello-wikipedia.png)  
+![TLS Encrypted Data](screenshots/tls-encrypted-application-data.png)
+
 ## Outcome
-This lab establishes a baseline understanding of normal DNS and TCP behaviour during web browsing. Having this baseline is essential before analysing traffic that may indicate misconfiguration, abnormal activity, or malicious behaviour.
+This lab establishes a basic baseline of normal DNS, TCP, and TLS behaviour during web browsing. Understanding this baseline is important before analysing traffic that may indicate errors, misconfiguration, or suspicious activity.
