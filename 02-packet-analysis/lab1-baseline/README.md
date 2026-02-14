@@ -18,11 +18,21 @@ Capture and analyse normal network traffic to build an understanding of standard
 - The matching DNS response was correlated using the same Transaction ID, confirming successful domain resolution.
 - DNS resolution occurred before any TCP connection was established, which aligns with normal web traffic behaviour.
 
-## Evidence
-The screenshots below show the DNS query and its corresponding response, linked using the Transaction ID field.
+- A TCP three-way handshake was observed prior to HTTPS communication.
+- The handshake consisted of a SYN packet from the client, a SYN/ACK response from the server, and a final ACK from the client.
+- Successful completion of the handshake confirmed that a reliable TCP connection was established before encrypted data transfer began.
 
+## Evidence
+The screenshots below show the DNS query and response, followed by the TCP three-way handshake observed during the same browsing session.
+
+### DNS Resolution
 ![DNS Query](screenshots/dns-query.png)
 ![DNS Response](screenshots/dns-response.png)
 
+### TCP Three-Way Handshake
+![TCP SYN](screenshots/tcp-syn.png)
+![TCP SYN-ACK](screenshots/tcp-synack.png)
+![TCP ACK](screenshots/tcp-ack.png)
+
 ## Outcome
-This lab establishes a clear baseline of what normal DNS behaviour looks like. Understanding this baseline is important before attempting to identify abnormal or potentially malicious network activity.
+This lab establishes a baseline understanding of normal DNS and TCP behaviour during web browsing. Having this baseline is essential before analysing traffic that may indicate misconfiguration, abnormal activity, or malicious behaviour.
