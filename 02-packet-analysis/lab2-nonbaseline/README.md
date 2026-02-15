@@ -17,6 +17,8 @@ This lab focuses on:
 ## Method
 Traffic was intentionally generated to create non-baseline patterns. All traffic was captured using Wireshark and analysed to determine how it differs from normal user activity and whether it could be considered suspicious from a SOC perspective.
 
+---
+
 ## DNS Analysis — Non-Baseline Behaviour
 
 ### What was done
@@ -39,6 +41,31 @@ A burst of NXDOMAIN DNS activity like this could indicate automated or scripted 
 - [DNS NXDOMAIN response](screenshots/dns_nxdomain_response.png)
 - [DNS NXDOMAIN PCAP](pcap/dns_nxdomain_nonbaseline.pcapng)
 
+---
+
+## TCP Analysis — Non-Baseline Behaviour
+
+### What was done
+Repeated TCP connection attempts were generated to a destination that was not accepting connections in order to create failed TCP handshakes.
+
+### Wireshark Filter
+tcp.flags.syn == 1 && tcp.flags.ack == 0
+
+### What was observed
+- Repeated TCP SYN packets from the same source
+- Connection attempts occurred close together in time
+- No successful TCP handshakes were established
+- Multiple SYN retransmissions were observed, indicating failed connections
+
+### SOC Interpretation
+Repeated failed TCP connection attempts may indicate port scanning activity, misconfigured applications, or automated behaviour. In an enterprise environment, this type of traffic would warrant further investigation.
+
+### Evidence
+- [TCP SYN burst](screenshots/tcp_syn_burst.png)
+- [TCP failed connection detail](screenshots/tcp_failed_connection_detail.png)
+- [TCP PCAP](pcap/tcp_failed_connections_nonbaseline.pcapng)
+
+---
 
 ## Next Steps
-Additional non-baseline analysis will be performed for TCP connection behaviour and TLS session characteristics.
+Additional non-baseline analysis will be performed for TLS session characteristics.
