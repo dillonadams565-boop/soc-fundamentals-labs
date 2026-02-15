@@ -29,6 +29,7 @@ This lab focuses on local authentication activity only. Controlled failed logon 
 A small number of failed logon attempts followed by a successful logon is typical of normal user activity. In a SOC environment, higher volumes of failed logons, failures across multiple accounts, or remote logon attempts would warrant further investigation.
 
 ## Evidence
-- [Windows logon sequence (4625 → 4624)](03-authentication-logs/windows/screenshots/windows_failed_logons_sequence.png)
-- [Failed logon XML view (Event ID 4625)](03-authentication-logs/windows/screenshots/windows_failed_logon_xml.png)
-- [Successful logon XML view (Event ID 4624)](03-authentication-logs/windows/screenshots/windows_successful_logon_xml.png)
+- [Windows logon sequence (4625 → 4624)](./screenshots/windows_failed_logons_sequence.png)
+- [Failed logon XML view (Event ID 4625)](./screenshots/windows_failed_logon_xml.png)
+- [Successful logon XML view (Event ID 4624)](./screenshots/windows_successful_logon_xml.png)
+
